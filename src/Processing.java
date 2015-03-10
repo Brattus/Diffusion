@@ -11,23 +11,23 @@ public class Processing extends PApplet {
     }
 
     public void setup() {
-        size(400, 400);
+        size(800, 800);
         frameRate(300);
         smooth();
-        for(int i=0; i<myCircleArray.length; i++) {
-            float r1 = random(150,200);
-            float r2 = random(100,300);
-    // (o.o)
-                myCircleArray[i] = new MovingCircle(200, 200, 2);
+        for (int i = 0; i < myCircleArray.length; i++) {
+            float r1 = random(150, 200);
+            float r2 = random(100, 300);
+            // (o.o)
+            myCircleArray[i] = new MovingCircle(200, 200, 2);
 
         }
     }
 
 
     public void draw() {
-        background(color(244,255,255));
+        background(color(244, 255, 255));
 
-        for(int i=0; i<myCircleArray.length; i++) {
+        for (int i = 0; i < myCircleArray.length; i++) {
 
             myCircleArray[i].move();
             myCircleArray[i].display();
@@ -54,32 +54,48 @@ public class Processing extends PApplet {
             float movement = 1;
             float r = random(0, 4);
 
+            //OPP
             if (r >= 0 && r < 1) {
                 y = y + movement;
+                if (y > height) {
+                    y = y - movement;
+                }
             }
-
+            //HØGRE
             if (r >= 1 && r < 2) {
                 x = x + movement;
+                if (x > width) {
+                    x = x - movement;
+                }
             }
-
+            //NED
             if (r >= 2 && r < 3) {
                 y = y - movement;
+                if (y < height) {
+                    y = y + movement;
+                }
             }
-
+            //VENSTRE
             if (r >= 3 && r < 4) {
                 x = x - movement;
+                if (x < width) {
+                    x = x + movement;
+
+                }
             }
+
+
         }
 
         void checkCollisions() {
 
-            float r = circleSize/2;
+            float r = circleSize / 2;
 
-            if ( (x<r) || (x>width-r)){
+            if ((x < r) || (x > width - r)) {
                 xSpeed = -xSpeed;
             }
 
-            if( (y<r) || (y>height-r)) {
+            if ((y < r) || (y > height - r)) {
                 ySpeed = -ySpeed;
             }
 
@@ -87,7 +103,7 @@ public class Processing extends PApplet {
         }
 
         void display() {
-            fill(color(255,0,0));
+            fill(color(255, 0, 0));
 
             ellipse(x, y, circleSize, circleSize);
 
@@ -97,13 +113,16 @@ public class Processing extends PApplet {
         float getX() {
             return x;
         }
+
         float getY() {
             return y;
         }
-        void setX(float x){
+
+        void setX(float x) {
             this.x = x;
         }
-        void setY(float y){
+
+        void setY(float y) {
             this.y = y;
         }
 

@@ -104,7 +104,7 @@ public class Processing extends PApplet {
 
 
         }
-
+/*
         void checkCollisions() {
 
             float r = circleSize / 2;
@@ -117,7 +117,7 @@ public class Processing extends PApplet {
                 ySpeed = -ySpeed;
             }
 
-
+*/
         }
 
         void display() {

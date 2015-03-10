@@ -17,7 +17,7 @@ public class Processing extends PApplet {
         for(int i=0; i<myCircleArray.length; i++) {
             float r1 = random(150,200);
             float r2 = random(100,300);
-
+    // (o.o)
                 myCircleArray[i] = new MovingCircle(200, 200, 2);
 
         }

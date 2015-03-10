@@ -4,6 +4,11 @@ public class Processing extends PApplet {
 
 
     MovingCircle[] myCircleArray = new MovingCircle[200];
+    float previousX = 0;
+    float previousY = 0;
+    float x = 0;
+    float y = 0;
+    boolean loading = true;
 
 
     public static void main(String args[]) {
@@ -11,7 +16,7 @@ public class Processing extends PApplet {
     }
 
     public void setup() {
-        size(800, 800);
+        size(400, 400);
         frameRate(300);
         noStroke();
         smooth();
@@ -24,9 +29,14 @@ public class Processing extends PApplet {
         }
     }
 
-
     public void draw() {
         background(color(244, 255, 255));
+        while(loading){
+            for(int i = 0; i < myCircleArray.length; i++){
+                findPlace(myCircleArray[i]);
+            }
+            loading = false;
+        }
 
         for (int i = 0; i < myCircleArray.length; i++) {
 
@@ -36,9 +46,36 @@ public class Processing extends PApplet {
         }
     }
 
+    private void findPlace(MovingCircle movingCircle) {
+        float currentX = getX();
+        float currentY = getY();
+        float random;
+        boolean placeFound = false;
+
+        while(!placeFound) {
+            if (currentX == previousX || currentX == 200) {
+                random = random(-1, 1);
+                if (random < 0) {
+                    currentX -= 1;
+                } else currentX += 1;
+                previousX = currentX;
+                x = currentX;
+            }
+            if (currentY == previousY || currentY == 200) {
+                random = random(-1, 1);
+                if (random < 0) {
+                    currentY -= 1;
+                } else currentY += 1;
+                previousY = currentY;
+                y = currentY;
+            }
+            if(currentX != previousX || currentY != previousY) {placeFound = true; }
+        }
+    }
+
+
+
     class MovingCircle {
-        float x;
-        float y;
         float xSpeed;
         float ySpeed;
         float circleSize;
@@ -120,6 +157,7 @@ public class Processing extends PApplet {
 */
         }
 
+
         void display() {
             fill(color(255, 0, 0));
 
@@ -128,43 +166,7 @@ public class Processing extends PApplet {
 
         }
 
-        float getX() {
-            return x;
-        }
 
-        float getY() {
-            return y;
-        }
-
-        void setX(float x) {
-            this.x = x;
-        }
-
-        void setY(float y) {
-            this.y = y;
-        }
 
     }
-
-    /*public void placeCircles(MovingCircle instance){
-        float currentX = instance.getX();
-        float currentY = instance.getY();
-        float random;
-        float previousX;
-        float previousY;
-        if(currentX == previousX || currentX == 200){
-            random = random(-1, 1);
-            if(random < 0){ currentX -= 1; } else currentX += 1;
-            instance.setX(currentX);
-            previousX = currentX;
-        }
-        if(currentY == previousY || currentY == 200){
-            random = random(-1, 1);
-            if(random < 0){ currentY -= 1; } else currentY += 1;
-            instance.setY(currentY);
-            previousY = currentY;
-        }
-    }*/
-
-
 }

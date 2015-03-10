@@ -18,7 +18,7 @@ public class Processing extends PApplet {
             float r1 = random(150, 200);
             float r2 = random(100, 300);
             // (o.o)
-            myCircleArray[i] = new MovingCircle(200, 200, 2);
+            myCircleArray[i] = new MovingCircle(width/2, height/2, 2);
 
         }
     }
@@ -45,6 +45,7 @@ public class Processing extends PApplet {
         MovingCircle(float xpos, float ypos, float csize) {
             x = xpos;
             y = ypos;
+
             circleSize = csize;
 
 
@@ -57,32 +58,48 @@ public class Processing extends PApplet {
             //OPP
             if (r >= 0 && r < 1) {
                 y = y + movement;
-                if (y > height) {
+                if (y == height) {
                     y = y - movement;
                 }
             }
             //HØGRE
             if (r >= 1 && r < 2) {
                 x = x + movement;
-                if (x > width) {
+                if (x == width) {
                     x = x - movement;
                 }
             }
             //NED
             if (r >= 2 && r < 3) {
                 y = y - movement;
-                if (y < height) {
+                if (y == 0) {
                     y = y + movement;
                 }
             }
             //VENSTRE
             if (r >= 3 && r < 4) {
                 x = x - movement;
-                if (x < width) {
+                if (x == 0) {
                     x = x + movement;
 
                 }
             }
+/*
+            if(x >= width) {
+                x -= movement;
+            }
+            else if(x <= width) {
+                x += movement;
+            }
+
+            if(y >= height) {
+                y -= movement;
+            }
+            else if(y <= height) {
+                y += movement
+                ;
+            }*/
+
 
 
         }

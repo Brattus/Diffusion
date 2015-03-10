@@ -3,7 +3,7 @@ import processing.core.PApplet;
 public class Processing extends PApplet {
 
 
-    MovingCircle[] myCircleArray = new MovingCircle[1000];
+    MovingCircle[] myCircleArray = new MovingCircle[200];
 
 
     public static void main(String args[]) {
@@ -12,12 +12,13 @@ public class Processing extends PApplet {
 
     public void setup() {
         size(400, 400);
-        frameRate(30);
+        frameRate(300);
         smooth();
         for(int i=0; i<myCircleArray.length; i++) {
             float r1 = random(150,200);
             float r2 = random(100,300);
-            myCircleArray[i] = new MovingCircle(200, 200, 2);
+
+                myCircleArray[i] = new MovingCircle(200, 200, 2);
 
         }
     }
@@ -25,6 +26,7 @@ public class Processing extends PApplet {
 
     public void draw() {
         background(color(244,255,255));
+
         for(int i=0; i<myCircleArray.length; i++) {
 
             myCircleArray[i].move();

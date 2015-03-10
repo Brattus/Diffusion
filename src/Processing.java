@@ -3,9 +3,10 @@ import processing.core.PApplet;
 public class Processing extends PApplet {
 
 
-    MovingCircle[] myCircleArray = new MovingCircle[200];
+    MovingCircle[] myCircleArray = new MovingCircle[700];
     int totalSteps = 0;
     int particularSteps = 0;
+    boolean edgeReached = false;
 
 
     public static void main(String args[]) {
@@ -13,7 +14,7 @@ public class Processing extends PApplet {
     }
 
     public void setup() {
-        size(800, 800);
+        size(500, 500);
         frameRate(300);
         noStroke();
         smooth();
@@ -46,7 +47,7 @@ public class Processing extends PApplet {
         // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
         println("###STATISTICS###");
         println("Total steps made: " + totalSteps);
-        println("Steps made by particle No. 5: " + particularSteps);
+        println("Ole Martin made " + particularSteps + " of those steps!");
 
     }
 
@@ -119,8 +120,6 @@ public class Processing extends PApplet {
                 ;
             }*/
 
-
-
         }
 /*
         void checkCollisions() {
@@ -148,9 +147,9 @@ public class Processing extends PApplet {
 
         void distinguish() {
             fill(color(0, 0, 255));
-            ellipse(x, y, circleSize+1, circleSize+1);
+            ellipse(x, y, circleSize, circleSize);
             textSize(12);
-            text("Siebe", x+7, y);
+            text("Ole Martin", x+7, y);
         }
     }
 

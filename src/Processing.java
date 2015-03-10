@@ -13,6 +13,7 @@ public class Processing extends PApplet {
     public void setup() {
         size(800, 800);
         frameRate(300);
+        noStroke();
         smooth();
         for (int i = 0; i < myCircleArray.length; i++) {
             float r1 = random(150, 200);

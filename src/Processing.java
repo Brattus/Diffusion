@@ -4,6 +4,8 @@ public class Processing extends PApplet {
 
 
     MovingCircle[] myCircleArray = new MovingCircle[200];
+    int totalSteps = 0;
+    int particularSteps = 0;
 
 
     public static void main(String args[]) {
@@ -18,7 +20,7 @@ public class Processing extends PApplet {
         for (int i = 0; i < myCircleArray.length; i++) {
             float r1 = random(150, 200);
             float r2 = random(100, 300);
-            // (o.o)
+
             myCircleArray[i] = new MovingCircle(width/2, height/2, 2);
 
         }
@@ -28,12 +30,24 @@ public class Processing extends PApplet {
     public void draw() {
         background(color(244, 255, 255));
 
+        // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
         for (int i = 0; i < myCircleArray.length; i++) {
-
+            if(i == 5) {
+                particularSteps++;
+            }
+        // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
             myCircleArray[i].move();
-            myCircleArray[i].display();
+            if(i == 5){
+                myCircleArray[i].distinguish();
+            }
+            else myCircleArray[i].display();
             println(millis());
         }
+        // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
+        println("###STATISTICS###");
+        println("Total steps made: " + totalSteps);
+        println("Steps made by particle No. 5: " + particularSteps);
+
     }
 
     class MovingCircle {
@@ -53,6 +67,10 @@ public class Processing extends PApplet {
         }
 
         void move() {
+            // Variable holding total number of moves/steps made.
+            totalSteps++;
+            // Check a particular "agent".
+
             float movement = 1;
             float r = random(0, 4);
 
@@ -122,9 +140,17 @@ public class Processing extends PApplet {
         void display() {
             fill(color(255, 0, 0));
 
+
             ellipse(x, y, circleSize, circleSize);
 
 
+        }
+
+        void distinguish() {
+            fill(color(0, 0, 255));
+            ellipse(x, y, circleSize+1, circleSize+1);
+            textSize(12);
+            text("Siebe", x+7, y);
         }
     }
 

@@ -3,7 +3,7 @@ import processing.core.PApplet;
 public class Processing extends PApplet {
 
     public static void main(String args[]) {
-        PApplet.main(new String[] { "--present", "Processing" });
+        PApplet.main(new String[]{"--present", "Processing"});
     }
 
     MovingCircle[] myCircleArray = new MovingCircle[700];
@@ -17,8 +17,11 @@ public class Processing extends PApplet {
 
     public void setup() {
         // Keep track of steps made in x direction.
-        left = 0; right = 0; up = 0; down = 0;
-        size(200, 200);
+        left = 0;
+        right = 0;
+        up = 0;
+        down = 0;
+        size(500, 500);
         frameRate(1000);
         noStroke();
         smooth();
@@ -26,7 +29,7 @@ public class Processing extends PApplet {
             float r1 = random(150, 200);
             float r2 = random(100, 300);
 
-            myCircleArray[i] = new MovingCircle(width/2, height/2, 2);
+            myCircleArray[i] = new MovingCircle(width / 2, height / 2, 2);
 
         }
     }
@@ -45,17 +48,14 @@ public class Processing extends PApplet {
                 // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
                 myCircleArray[i].move();
                 if (i == 0) {
-                    myCircleArray[i].distinguish();
-                } else myCircleArray[i].display();
+                    myCircleArray[i].distinguish(1);
+                }
+                else if (i == 19) {
+                    myCircleArray[i].distinguish(2);
+                }
+                else myCircleArray[i].display();
 
             }
-            // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
-        /*println("###STATISTICS###");
-        println("Total steps made: " + totalSteps);
-        println("Ole Martin made " + particularSteps + " of those steps!");
-        println("Time to get to edge: " + timeToEdge);
-
-*/
     }
 
     class MovingCircle {
@@ -86,7 +86,7 @@ public class Processing extends PApplet {
                 up++;
                 y = y + movement;
                 if (y == height) {
-                    if(!edgeReached){
+                    if (!edgeReached) {
                         timeToEdge = seconds;
                         println(seconds);
                     }
@@ -99,7 +99,7 @@ public class Processing extends PApplet {
                 right++;
                 x = x + movement;
                 if (x == width) {
-                    if(!edgeReached){
+                    if (!edgeReached) {
                         timeToEdge = seconds;
                         println(seconds);
                     }
@@ -112,7 +112,7 @@ public class Processing extends PApplet {
                 down++;
                 y = y - movement;
                 if (y == 0) {
-                    if(!edgeReached){
+                    if (!edgeReached) {
                         timeToEdge = seconds;
                         println(seconds);
                     }
@@ -125,7 +125,7 @@ public class Processing extends PApplet {
                 left++;
                 x = x - movement;
                 if (x == 0) {
-                    if(!edgeReached){
+                    if (!edgeReached) {
                         timeToEdge = seconds;
                         println(seconds);
                     }
@@ -175,15 +175,19 @@ public class Processing extends PApplet {
 
         }
 
-        void distinguish() {
-            fill(color(0, 0, 255));
-            ellipse(x, y, circleSize, circleSize);
-            textSize(12);
-            text("Ole Martin", x+7, y);
+        void distinguish(int no) {
+            if(no == 1) {
+                fill(color(0, 0, 255));
+                ellipse(x, y, circleSize, circleSize);
+                textSize(12);
+                text("Ole Martin", x + 7, y);
+            }
+            if (no == 2) {
+                fill(color(0, 255, 0));
+                ellipse(x, y, circleSize, circleSize);
+                textSize(12);
+                text("Per Olav", x + 7, y);
+            }
         }
     }
-
-
-
-
 }

@@ -6,7 +6,7 @@ public class Processing extends PApplet {
         PApplet.main(new String[]{"--present", "Processing"});
     }
 
-    MovingCircle[] myCircleArray = new MovingCircle[700];
+    MovingCircle[] myCircleArray = new MovingCircle[1000];
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
@@ -22,7 +22,7 @@ public class Processing extends PApplet {
         right = 0;
         up = 0;
         down = 0;
-        size(500, 500);
+        size(700, 700);
         frameRate(1000);
         noStroke();
         smooth();
@@ -64,7 +64,7 @@ public class Processing extends PApplet {
                     myCircleArray[i].distinguish(5);
                 }
                 else myCircleArray[i].display();
-/* WRITE THE TIME SPENT TO REACH THE EDGE
+/* WRITE THE TIME SPENT TO REACH THE EDGE (DECREASES PERFORMANCE GREATLY)
                 if(edgeReached){
                     if(!saved){
                         timeToEdge = seconds;
@@ -74,8 +74,13 @@ public class Processing extends PApplet {
                     textSize(15);
                     text("Time to edge: " + timeToEdge, 40, height-10);
                 }
+    WRITE STEPS MADE BY PARTICULAR, AND TOTAL STEPS (DECREASES PERFORMANCE GREATLY)
+                fill(0);
+                textSize(18);
+                text("Steps made by Ole Martin: " + particularSteps, 20, height-10);
+                int ksteps = totalSteps/1000;
+                text("Total steps made " + ksteps + "k", 400, height-10);
 */
-
             }
     }
 
@@ -214,13 +219,13 @@ public class Processing extends PApplet {
             if (no == 4) {
                 fill(color(255, 153, 0));
                 ellipse(x+3, y+3, circleSize, circleSize);
-                textSize(12);
+                textSize(15);
                 text("Dr. Siebe", x + 7, y);
             }
             if (no == 5) {
                 fill(color(255, 222, 0));
                 ellipse(x+3, y+3, circleSize, circleSize);
-                textSize(12);
+                textSize(15);
                 text("Dr. Prof. Hans Georg", x + 7, y);
             }
         }

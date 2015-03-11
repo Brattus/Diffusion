@@ -14,6 +14,7 @@ public class Processing extends PApplet {
     float seconds;
     float timeToEdge;
     int left, right, up, down;
+    boolean saved = false;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -53,7 +54,27 @@ public class Processing extends PApplet {
                 else if (i == 19) {
                     myCircleArray[i].distinguish(2);
                 }
+                else if (i == 420) {
+                    myCircleArray[i].distinguish(3);
+                }
+                else if (i == 100) {
+                    myCircleArray[i].distinguish(4);
+                }
+                else if (i == 140) {
+                    myCircleArray[i].distinguish(5);
+                }
                 else myCircleArray[i].display();
+/* WRITE THE TIME SPENT TO REACH THE EDGE
+                if(edgeReached){
+                    if(!saved){
+                        timeToEdge = seconds;
+                        saved = true;
+                    }
+                    fill(0);
+                    textSize(15);
+                    text("Time to edge: " + timeToEdge, 40, height-10);
+                }
+*/
 
             }
     }
@@ -87,7 +108,6 @@ public class Processing extends PApplet {
                 y = y + movement;
                 if (y == height) {
                     if (!edgeReached) {
-                        timeToEdge = seconds;
                         println(seconds);
                     }
                     edgeReached = true;
@@ -100,7 +120,6 @@ public class Processing extends PApplet {
                 x = x + movement;
                 if (x == width) {
                     if (!edgeReached) {
-                        timeToEdge = seconds;
                         println(seconds);
                     }
                     edgeReached = true;
@@ -113,7 +132,6 @@ public class Processing extends PApplet {
                 y = y - movement;
                 if (y == 0) {
                     if (!edgeReached) {
-                        timeToEdge = seconds;
                         println(seconds);
                     }
                     edgeReached = true;
@@ -126,7 +144,6 @@ public class Processing extends PApplet {
                 x = x - movement;
                 if (x == 0) {
                     if (!edgeReached) {
-                        timeToEdge = seconds;
                         println(seconds);
                     }
                     edgeReached = true;
@@ -186,7 +203,25 @@ public class Processing extends PApplet {
                 fill(color(0, 255, 0));
                 ellipse(x, y, circleSize, circleSize);
                 textSize(12);
-                text("Per Olav", x + 7, y);
+                text("Robin", x + 7, y);
+            }
+            if (no == 3) {
+                fill(color(9, 112, 84));
+                ellipse(x, y, circleSize, circleSize);
+                textSize(12);
+                text("Gøran", x + 7, y);
+            }
+            if (no == 4) {
+                fill(color(255, 153, 0));
+                ellipse(x+3, y+3, circleSize, circleSize);
+                textSize(12);
+                text("Dr. Siebe", x + 7, y);
+            }
+            if (no == 5) {
+                fill(color(255, 222, 0));
+                ellipse(x+3, y+3, circleSize, circleSize);
+                textSize(12);
+                text("Dr. Prof. Hans Georg", x + 7, y);
             }
         }
     }

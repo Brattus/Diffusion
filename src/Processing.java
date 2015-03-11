@@ -2,8 +2,11 @@ import processing.core.PApplet;
 
 public class Processing extends PApplet {
 
+    public static void main(String args[]) {
+        PApplet.main(new String[] { "--present", "Processing" });
+    }
 
-    MovingCircle[] myCircleArray = new MovingCircle[1];
+    MovingCircle[] myCircleArray = new MovingCircle[700];
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
@@ -12,11 +15,10 @@ public class Processing extends PApplet {
     float timeToEdge;
     int left, right, up, down;
 
-
     public void setup() {
         // Keep track of steps made in x direction.
         left = 0; right = 0; up = 0; down = 0;
-        size(50, 50);
+        size(200, 200);
         frameRate(1000);
         noStroke();
         smooth();
@@ -31,28 +33,28 @@ public class Processing extends PApplet {
 
 
     public void draw() {
-        seconds = (millis()/1000);
+            seconds = (millis() / 1000);
 
-        background(color(244, 255, 255));
+            background(color(244, 255, 255));
 
-        // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
-        for (int i = 0; i < myCircleArray.length; i++) {
-            if(i == 0) {
-                particularSteps++;
+            // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
+            for (int i = 0; i < myCircleArray.length; i++) {
+                if (i == 0) {
+                    particularSteps++;
+                }
+                // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
+                myCircleArray[i].move();
+                if (i == 0) {
+                    myCircleArray[i].distinguish();
+                } else myCircleArray[i].display();
+
             }
-        // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
-            myCircleArray[i].move();
-            if(i == 0){
-                myCircleArray[i].distinguish();
-            }
-            else myCircleArray[i].display();
-
-        }
-        // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
+            // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
         /*println("###STATISTICS###");
         println("Total steps made: " + totalSteps);
         println("Ole Martin made " + particularSteps + " of those steps!");
         println("Time to get to edge: " + timeToEdge);
+
 */
     }
 

@@ -3,19 +3,21 @@ import processing.core.PApplet;
 public class Processing extends PApplet {
 
 
-    MovingCircle[] myCircleArray = new MovingCircle[700];
+    MovingCircle[] myCircleArray = new MovingCircle[1];
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
+    float time;
+    float seconds;
+    float timeToEdge;
+    int left, right, up, down;
 
-
-    public static void main(String args[]) {
-        PApplet.main(new String[]{"--present", "Processing"});
-    }
 
     public void setup() {
-        size(500, 500);
-        frameRate(300);
+        // Keep track of steps made in x direction.
+        left = 0; right = 0; up = 0; down = 0;
+        size(50, 50);
+        frameRate(1000);
         noStroke();
         smooth();
         for (int i = 0; i < myCircleArray.length; i++) {
@@ -29,26 +31,29 @@ public class Processing extends PApplet {
 
 
     public void draw() {
+        seconds = (millis()/1000);
+
         background(color(244, 255, 255));
 
         // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
         for (int i = 0; i < myCircleArray.length; i++) {
-            if(i == 5) {
+            if(i == 0) {
                 particularSteps++;
             }
         // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
             myCircleArray[i].move();
-            if(i == 5){
+            if(i == 0){
                 myCircleArray[i].distinguish();
             }
             else myCircleArray[i].display();
-            println(millis());
+
         }
         // Skriver ut diverse informasjon i konsoll, etter endt kjøring.
-        println("###STATISTICS###");
+        /*println("###STATISTICS###");
         println("Total steps made: " + totalSteps);
         println("Ole Martin made " + particularSteps + " of those steps!");
-
+        println("Time to get to edge: " + timeToEdge);
+*/
     }
 
     class MovingCircle {
@@ -70,40 +75,63 @@ public class Processing extends PApplet {
         void move() {
             // Variable holding total number of moves/steps made.
             totalSteps++;
-            // Check a particular "agent".
 
             float movement = 1;
             float r = random(0, 4);
 
             //OPP
             if (r >= 0 && r < 1) {
+                up++;
                 y = y + movement;
                 if (y == height) {
+                    if(!edgeReached){
+                        timeToEdge = seconds;
+                        println(seconds);
+                    }
+                    edgeReached = true;
                     y = y - movement;
                 }
             }
             //HØGRE
             if (r >= 1 && r < 2) {
+                right++;
                 x = x + movement;
                 if (x == width) {
+                    if(!edgeReached){
+                        timeToEdge = seconds;
+                        println(seconds);
+                    }
+                    edgeReached = true;
                     x = x - movement;
                 }
             }
             //NED
             if (r >= 2 && r < 3) {
+                down++;
                 y = y - movement;
                 if (y == 0) {
+                    if(!edgeReached){
+                        timeToEdge = seconds;
+                        println(seconds);
+                    }
+                    edgeReached = true;
                     y = y + movement;
                 }
             }
             //VENSTRE
             if (r >= 3 && r < 4) {
+                left++;
                 x = x - movement;
                 if (x == 0) {
+                    if(!edgeReached){
+                        timeToEdge = seconds;
+                        println(seconds);
+                    }
+                    edgeReached = true;
                     x = x + movement;
-
                 }
             }
+
 /*
             if(x >= width) {
                 x -= movement;

@@ -10,7 +10,6 @@ public class Processing extends PApplet {
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
-    float time;
     float seconds;
     float timeToEdge;
     int left, right, up, down;

@@ -16,7 +16,7 @@ public class CSV extends PApplet {
         table.addColumn("down");
         table.addColumn("left");
 
-        processing.data.TableRow newRow = table.addRow();
+        table.addRow();
     }
 
     /**
@@ -25,13 +25,13 @@ public class CSV extends PApplet {
      * Sick standardavvik, og forventningsverdi.
      * Inverse transform sampling.
      */
-    public void addData(String up, String right, String down, String left) {
-        processing.data.TableRow newRow = table.addRow();
-        newRow.setString("up", up);
-        newRow.setString("right", right);
-        newRow.setString("down", down);
-        newRow.setString("left", left);
-        saveTable(table, "data/new.csv");
+    public void addData(int up, int right, int down, int left) {
+        table.setInt(0, "up", up);
+        table.setInt(0, "right", right);
+        table.setInt(0, "down", down);
+        table.setInt(0, "left", left);
+        saveTable(table, "data.csv");
     }
+
 
 }

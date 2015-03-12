@@ -18,8 +18,10 @@ public class ProcessingWithOne extends PApplet {
     float xVal = 0;
     float yVal = 0;
     boolean pause = false;
+    CSV csv;
 
     public void setup() {
+        csv = new CSV();
         // Keep track of steps made in x direction.
         left = 0;
         right = 0;
@@ -44,8 +46,8 @@ public class ProcessingWithOne extends PApplet {
 
         background(color(244, 255, 255));
         // Draw some grid lines.
-        line(width/2, 0, width/2, height);
-        line(0, height/2, width, height/2);
+        line(width/2, 0, width/2, height); // Horixontal
+        line(0, height/2, width, height/2); // Vertical
         stroke(0);
 
         // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
@@ -86,6 +88,9 @@ public class ProcessingWithOne extends PApplet {
         textSize(12);
         float distance = (xVal + yVal) - (height / 2 + width / 2);
         text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + yVal, width - 200, 10);
+
+        //Add desired data to a file (data/..)
+        //csv.addData(down, right, up, left);
     }
 
     // Pause, un-pause the drawing loop.

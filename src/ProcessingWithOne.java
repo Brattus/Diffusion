@@ -19,6 +19,8 @@ public class ProcessingWithOne extends PApplet {
     float yVal = 0;
     boolean pause = false;
     CSV csv;
+    // Distance from origo in X and Y dir.
+    float xDist; float yDist;
 
     public void setup() {
         csv = new CSV();
@@ -82,11 +84,19 @@ public class ProcessingWithOne extends PApplet {
         int ksteps = totalSteps / 1000;
         text("Total steps made " + ksteps + "k", 10, height - 10);
 
-        textSize(8);
-        text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft" + left, 10, 10);
+        textSize(12);
+        text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft: " + left, 10, 15);
 
         textSize(12);
-        float distance = (xVal + yVal) - (height / 2 + width / 2);
+        if(xVal > width/2){
+            xDist = xVal - width/2;
+        }
+        else xDist = (xVal*-1) + width/2;
+        if(yVal > height/2){
+            yDist = yVal - height/2;
+        }
+        else yDist = (yVal*-1) + height/2;
+        float distance = xDist + yDist;
         text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 10);
 
         //Add desired data to a file (data/..)

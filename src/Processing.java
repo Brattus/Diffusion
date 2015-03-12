@@ -7,7 +7,7 @@ public class Processing extends PApplet {
     }
 
     MovingCircle[] myCircleArray = new MovingCircle[1000];
-    int totalSteps = 0;
+    float totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
     float seconds;
@@ -71,11 +71,13 @@ public class Processing extends PApplet {
         }
         fill(0);
         textSize(18);
-        int ksteps = totalSteps/1000;
+        float ksteps = totalSteps/1000;
+        String skk = nf(ksteps, 1, 1);
         if(ksteps >= 1000){
             ksteps = ksteps/1000;
-            text("Total steps made: " + ksteps + "M", 10, height-10);
-        } else text("Total steps made: " + ksteps + "K", 10, height-10);
+            String sk = nf(ksteps, 1, 1);
+            text("Total steps made: " + sk + " M", 10, height-10);
+        } else text("Total steps made: " + skk + " K", 10, height-10);
 
         text("X: " + xVal + "   Y: " + yVal, 5, 15);
     }

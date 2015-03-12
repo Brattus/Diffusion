@@ -1,12 +1,12 @@
 import processing.core.PApplet;
 
-public class Processing extends PApplet {
+public class ProcessingWithOne extends PApplet {
 
     public static void main(String args[]) {
-        PApplet.main(new String[]{"--present", "Processing"});
+        PApplet.main(new String[]{"--present", "ProcessingWithOne"});
     }
 
-    MovingCircle[] myCircleArray = new MovingCircle[1000];
+    MovingCircle[] myCircleArray = new MovingCircle[1];
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;

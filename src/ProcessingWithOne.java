@@ -10,7 +10,6 @@ public class ProcessingWithOne extends PApplet {
     int totalSteps = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
-    float time;
     float seconds;
     float timeToEdge;
     int left, right, up, down;
@@ -82,7 +81,7 @@ public class ProcessingWithOne extends PApplet {
         fill(0);
         textSize(18);
         int ksteps = totalSteps / 1000;
-        text("Total steps made " + ksteps + "k", 10, height - 10);
+        text("Total steps: " + ksteps + "K", 10, height - 10);
 
         textSize(12);
         text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft: " + left, 10, 15);
@@ -98,7 +97,7 @@ public class ProcessingWithOne extends PApplet {
         }
         else yDist = (yVal*-1) + height/2;
         float distance = xDist + yDist;
-        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 10);
+        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 15);
 
         //Add desired data to a file (data/..)
         //csv.addData(down, right, up, left);

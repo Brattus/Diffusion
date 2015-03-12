@@ -22,7 +22,7 @@ public class Processing extends PApplet {
         right = 0;
         up = 0;
         down = 0;
-        size(700, 700);
+        size(500, 500);
         frameRate(1000);
         noStroke();
         smooth();
@@ -37,51 +37,39 @@ public class Processing extends PApplet {
 
 
     public void draw() {
-            seconds = (millis() / 1000);
+        seconds = (millis() / 1000);
 
-            background(color(244, 255, 255));
+        background(color(244, 255, 255));
 
-            // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
-            for (int i = 0; i < myCircleArray.length; i++) {
-                if (i == 0) {
-                    particularSteps++;
-                }
-                // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
-                myCircleArray[i].move();
-                if (i == 0) {
-                    myCircleArray[i].distinguish(1);
-                }
-                else if (i == 19) {
-                    myCircleArray[i].distinguish(2);
-                }
-                else if (i == 420) {
-                    myCircleArray[i].distinguish(3);
-                }
-                else if (i == 100) {
-                    myCircleArray[i].distinguish(4);
-                }
-                else if (i == 140) {
-                    myCircleArray[i].distinguish(5);
-                }
-                else myCircleArray[i].display();
-/* WRITE THE TIME SPENT TO REACH THE EDGE (DECREASES PERFORMANCE GREATLY)
-                if(edgeReached){
-                    if(!saved){
-                        timeToEdge = seconds;
-                        saved = true;
-                    }
-                    fill(0);
-                    textSize(15);
-                    text("Time to edge: " + timeToEdge, 40, height-10);
-                }
-    WRITE STEPS MADE BY PARTICULAR, AND TOTAL STEPS (DECREASES PERFORMANCE GREATLY)
-                fill(0);
-                textSize(18);
-                text("Steps made by Ole Martin: " + particularSteps, 20, height-10);
-                int ksteps = totalSteps/1000;
-                text("Total steps made " + ksteps + "k", 400, height-10);
-*/
+        // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
+        for (int i = 0; i < myCircleArray.length; i++) {
+            if (i == 0) {
+                particularSteps++;
             }
+            // Viss i er like 5, farger vi den blå og legger tekst til - for å kunne se den enklere.
+            myCircleArray[i].move();
+            if (i == 0) {
+                myCircleArray[i].distinguish(1);
+            } else if (i == 19) {
+                myCircleArray[i].distinguish(2);
+            } else if (i == 420) {
+                myCircleArray[i].distinguish(3);
+            } else myCircleArray[i].display();
+
+        }
+        if (edgeReached) {
+            if (!saved) {
+                timeToEdge = seconds;
+                saved = true;
+            }
+            fill(0);
+            textSize(15);
+            text("Time to edge: " + timeToEdge, 10, 15);
+        }
+        fill(0);
+        textSize(18);
+        int ksteps = totalSteps/1000;
+        text("Total steps made " + ksteps + "k", 10, height-10);
     }
 
     class MovingCircle {
@@ -105,7 +93,8 @@ public class Processing extends PApplet {
             totalSteps++;
 
             float movement = 1;
-            float r = random(0, 4);
+            float r = random(0, 5);
+
 
             //OPP
             if (r >= 0 && r < 1) {
@@ -198,7 +187,7 @@ public class Processing extends PApplet {
         }
 
         void distinguish(int no) {
-            if(no == 1) {
+            if (no == 1) {
                 fill(color(0, 0, 255));
                 ellipse(x, y, circleSize, circleSize);
                 textSize(12);
@@ -215,18 +204,6 @@ public class Processing extends PApplet {
                 ellipse(x, y, circleSize, circleSize);
                 textSize(12);
                 text("Gøran", x + 7, y);
-            }
-            if (no == 4) {
-                fill(color(255, 153, 0));
-                ellipse(x+3, y+3, circleSize, circleSize);
-                textSize(15);
-                text("Dr. Siebe", x + 7, y);
-            }
-            if (no == 5) {
-                fill(color(255, 222, 0));
-                ellipse(x+3, y+3, circleSize, circleSize);
-                textSize(15);
-                text("Dr. Prof. Hans Georg", x + 7, y);
             }
         }
     }

@@ -83,11 +83,11 @@ public class ProcessingWithOne extends PApplet {
         text("Total steps made " + ksteps + "k", 10, height - 10);
 
         textSize(8);
-        text("Up: " + up + "\nRight: " + right + "\nDown: " + down + "\nLeft" + left, 10, 10);
+        text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft" + left, 10, 10);
 
         textSize(12);
         float distance = (xVal + yVal) - (height / 2 + width / 2);
-        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + yVal, width - 200, 10);
+        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 10);
 
         //Add desired data to a file (data/..)
         //csv.addData(down, right, up, left);

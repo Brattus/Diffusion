@@ -15,7 +15,9 @@ public class ProcessingWithOne extends PApplet {
     float timeToEdge;
     int left, right, up, down;
     boolean saved = false;
-    float xVal = 0; float yVal = 0;
+    float xVal = 0;
+    float yVal = 0;
+    boolean pause = false;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -41,6 +43,9 @@ public class ProcessingWithOne extends PApplet {
         seconds = (millis() / 1000);
 
         background(color(244, 255, 255));
+        // Draw some grid lines.
+
+
 
         // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
         for (int i = 0; i < myCircleArray.length; i++) {
@@ -71,16 +76,26 @@ public class ProcessingWithOne extends PApplet {
         }
         fill(0);
         textSize(18);
-        int ksteps = totalSteps/1000;
-        text("Total steps made " + ksteps + "k", 10, height-10);
+        int ksteps = totalSteps / 1000;
+        text("Total steps made " + ksteps + "k", 10, height - 10);
 
         textSize(8);
         text("Up: " + up + "\nRight: " + right + "\nDown: " + down + "\nLeft" + left, 10, 10);
 
-        textSize(8);
+        textSize(12);
         float distance = (xVal + yVal) - (height / 2 + width / 2);
-        text("Distance from origo: " + distance, width - 100, 10);
+        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + yVal, width - 150, 10);
     }
+
+    // Pause, un-pause the drawing loop.
+    public void keyPressed() {
+        pause = !pause;
+        if (pause)
+            noLoop();
+        else
+            loop();
+    }
+
 
     class MovingCircle {
 
@@ -205,6 +220,7 @@ public class ProcessingWithOne extends PApplet {
             }
 
         }
+
         public float getY() {
             return y;
         }

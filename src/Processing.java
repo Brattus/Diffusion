@@ -15,6 +15,7 @@ public class Processing extends PApplet {
     float timeToEdge;
     int left, right, up, down;
     boolean saved = false;
+    float xVal = 0; float yVal = 0;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -50,6 +51,8 @@ public class Processing extends PApplet {
             myCircleArray[i].move();
             if (i == 0) {
                 myCircleArray[i].distinguish(1);
+                xVal = myCircleArray[i].getX();
+                yVal = myCircleArray[i].getY();
             } else if (i == 19) {
                 myCircleArray[i].distinguish(2);
             } else if (i == 420) {
@@ -65,11 +68,13 @@ public class Processing extends PApplet {
             fill(0);
             textSize(15);
             text("Time to edge: " + timeToEdge, 10, 15);
+
         }
         fill(0);
         textSize(18);
         int ksteps = totalSteps/1000;
         text("Total steps made " + ksteps + "k", 10, height-10);
+        text("X: " + xVal + "   Y: " + yVal, 40, 15);
     }
 
     class MovingCircle {
@@ -84,9 +89,10 @@ public class Processing extends PApplet {
             y = ypos;
 
             circleSize = csize;
-
-
         }
+
+        public float getX(){ return x; }
+        public float getY(){ return y; }
 
         void move() {
             // Variable holding total number of moves/steps made.

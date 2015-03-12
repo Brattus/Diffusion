@@ -88,6 +88,7 @@ public class ProcessingWithOne extends PApplet {
         text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft: " + left, 10, 15);
 
         textSize(12);
+        // Calculate particles distance from origo.
         if(xVal > width/2){
             xDist = xVal - width/2;
         }

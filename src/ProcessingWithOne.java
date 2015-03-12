@@ -135,7 +135,7 @@ public class ProcessingWithOne extends PApplet {
             totalSteps++;
 
             float movement = 1;
-            float r = random(0, 5);
+            float r = random(0, 4);
 
 
             //OPP

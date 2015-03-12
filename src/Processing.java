@@ -79,7 +79,7 @@ public class Processing extends PApplet {
             text("Total steps made: " + sk + " M", 10, height-10);
         } else text("Total steps made: " + skk + " K", 10, height-10);
 
-        text("X: " + xVal + "   Y: " + yVal, 5, 15);
+        text("X: " + xVal + "   Y: " + (height-yVal), 5, 15);
     }
 
     class MovingCircle {

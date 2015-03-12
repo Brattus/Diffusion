@@ -66,14 +66,18 @@ public class Processing extends PApplet {
             }
             fill(0);
             textSize(15);
-            text("Time to edge: " + timeToEdge, 10, 15);
+            text("Time to edge: " + timeToEdge, 5, 30);
 
         }
         fill(0);
         textSize(18);
         int ksteps = totalSteps/1000;
-        text("Total steps made " + ksteps + "k", 10, height-10);
-        text("X: " + xVal + "   Y: " + yVal, 40, 15);
+        if(ksteps >= 1000){
+            ksteps = ksteps/1000;
+            text("Total steps made: " + ksteps + "M", 10, height-10);
+        } else text("Total steps made: " + ksteps + "K", 10, height-10);
+
+        text("X: " + xVal + "   Y: " + yVal, 5, 15);
     }
 
     class MovingCircle {

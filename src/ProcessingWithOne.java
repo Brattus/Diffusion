@@ -15,6 +15,7 @@ public class ProcessingWithOne extends PApplet {
     float timeToEdge;
     int left, right, up, down;
     boolean saved = false;
+    float xVal = 0; float yVal = 0;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -50,6 +51,8 @@ public class ProcessingWithOne extends PApplet {
             myCircleArray[i].move();
             if (i == 0) {
                 myCircleArray[i].distinguish(1);
+                xVal = myCircleArray[i].getX();
+                yVal = myCircleArray[i].getY();
             } else if (i == 19) {
                 myCircleArray[i].distinguish(2);
             } else if (i == 420) {
@@ -75,7 +78,7 @@ public class ProcessingWithOne extends PApplet {
         text("Up: " + up + "\nRight: " + right + "\nDown: " + down + "\nLeft" + left, 10, 10);
 
         textSize(8);
-        float distance = (getX() + getY()) - (height / 2 + width / 2);
+        float distance = (xVal + yVal) - (height / 2 + width / 2);
         text("Distance from origo: " + distance, width - 100, 10);
     }
 

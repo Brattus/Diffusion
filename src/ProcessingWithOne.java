@@ -70,13 +70,20 @@ public class ProcessingWithOne extends PApplet {
         textSize(18);
         int ksteps = totalSteps/1000;
         text("Total steps made " + ksteps + "k", 10, height-10);
+
+        textSize(8);
+        text("Up: " + up + "\nRight: " + right + "\nDown: " + down + "\nLeft" + left, 10, 10);
+
+        textSize(8);
+        float distance = (getX() + getY()) - (height / 2 + width / 2);
+        text("Distance from origo: " + distance, width - 100, 10);
     }
 
     class MovingCircle {
-        float x;
-        float y;
-        float xSpeed;
-        float ySpeed;
+
+
+        public float x;
+        public float y;
         float circleSize;
 
         MovingCircle(float xpos, float ypos, float csize) {
@@ -193,18 +200,15 @@ public class ProcessingWithOne extends PApplet {
                 textSize(12);
                 text("Ole-Martin", x + 7, y);
             }
-            if (no == 2) {
-                fill(color(0, 255, 0));
-                ellipse(x, y, circleSize, circleSize);
-                textSize(12);
-                text("Robin", x + 7, y);
-            }
-            if (no == 3) {
-                fill(color(9, 112, 84));
-                ellipse(x, y, circleSize, circleSize);
-                textSize(12);
-                text("Gøran", x + 7, y);
-            }
+
         }
+        public float getY() {
+            return y;
+        }
+
+        public float getX() {
+            return x;
+        }
+
     }
 }

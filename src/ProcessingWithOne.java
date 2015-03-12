@@ -83,7 +83,7 @@ public class ProcessingWithOne extends PApplet {
         text("Total steps made " + ksteps + "k", 10, height - 10);
 
         textSize(8);
-        text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft" + left, 10, 10);
+        text("Up: " + down + "\nRight: " + right + "\nDown: " + up + "\nLeft: " + left, 10, 10);
 
         textSize(12);
         float distance = (xVal + yVal) - (height / 2 + width / 2);
@@ -92,6 +92,8 @@ public class ProcessingWithOne extends PApplet {
         //Add desired data to a file (data/..)
         //csv.addData(down, right, up, left);
     }
+
+
 
     // Pause, un-pause the drawing loop.
     public void keyPressed() {

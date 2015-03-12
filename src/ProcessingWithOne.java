@@ -44,8 +44,9 @@ public class ProcessingWithOne extends PApplet {
 
         background(color(244, 255, 255));
         // Draw some grid lines.
-
-
+        line(width/2, 0, width/2, height);
+        line(0, height/2, width, height/2);
+        stroke(0);
 
         // Viss i er lik 5, øker verdien. Vi følger altså en spesifikk partikkel.
         for (int i = 0; i < myCircleArray.length; i++) {
@@ -84,7 +85,7 @@ public class ProcessingWithOne extends PApplet {
 
         textSize(12);
         float distance = (xVal + yVal) - (height / 2 + width / 2);
-        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + yVal, width - 150, 10);
+        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + yVal, width - 200, 10);
     }
 
     // Pause, un-pause the drawing loop.

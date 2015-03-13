@@ -96,9 +96,18 @@ public class ProcessingWithOne extends PApplet {
             yDist = yVal - height/2;
         }
         else yDist = (yVal*-1) + height/2;
-        float distance = xDist + yDist;
-        text("Distance from origo: " + distance + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 15);
+        float distance = sqrt(xDist*xDist + yDist*yDist);
+        String distOri = nf(distance, 1, 1);
+        float sDistance = xDist + yDist;
+        String stepOri = nf(sDistance, 1, 0);
+        text("Steps from origo: " + stepOri + "\nX: " + xVal + "   Y: " + (height-yVal), width - 200, 15);
 
+        if(mousePressed){
+            line(width/2, height/2, xVal, yVal);
+            stroke(0);
+            textSize(12);
+            text("Distance from origo: " + distOri, width-200, 55);
+        }
         //Add desired data to a file (data/..)
         //csv.addData(down, right, up, left);
     }

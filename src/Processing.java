@@ -18,9 +18,8 @@ public class Processing extends PApplet {
     boolean saved = false;
     boolean pause = false;
     float xVal = 0; float yVal = 0;
-    int numbSelect = 4;
-    float probNorth = 1/numbSelect; float probEeast = 1/numbSelect; float probWest = 1/numbSelect; float probSouth = 1/numbSelect;
-    float probNorthEast = 0/numbSelect; float probNorthWest = 0/numbSelect; float probSouthEast = 0/numbSelect; float probSouthWest = 0/numbSelect;
+    int numbSelect;
+    double probNorth, probSouth, probEast, probWest;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -28,6 +27,11 @@ public class Processing extends PApplet {
         right = 0;
         up = 0;
         down = 0;
+        numbSelect = 4;
+        probNorth = 1.0;
+        probSouth = 1.0;
+        probEast = 1.0;
+        probWest = 1.0;
         size(500, 500);
         frameRate(1000);
         noStroke();
@@ -73,7 +77,7 @@ public class Processing extends PApplet {
             }
             fill(0);
             textSize(15);
-            text("Time to edge: " + timeToEdge, 5, 30);
+            text("Time to edge: " + timeToEdge + "s", 5, 95);
 
         }
         fill(0);
@@ -89,16 +93,20 @@ public class Processing extends PApplet {
         double totDist = getSquaredDist();
         String sqrDist = Double.toString(totDist);
 
-        double exDiffCoeff = getExpectedDiffCoeff(stepsRun);
+        double exDiffCoeff = getExpectedDiffCoeff(1);
         String diffCoeff = Double.toString(exDiffCoeff);
 
         double estDiff = getEstimatedDiffusion();
         String estDiffStr = Double.toString(estDiff);
 
+        double exDist = getExpectedDistance(stepsRun);
+        String exDistStr = Double.toString(exDist);
+
         text("X: " + xVal + "   Y: " + (height-yVal), 5, 15);
         text("Total dist: " + sqrDist, 5, 35);
-        text("ExDiffCoeff: " + diffCoeff, 5, 55);
-        text("EstDiff: " + estDiffStr, 5, 75);
+        text("Ex dist: " + exDistStr, 5, 55);
+        text("ExDiffCoeff: " + diffCoeff, 5, 75);
+        text("EstDiff: " + estDiffStr, 5, 95);
     }
 
     // Pause, un-pause the drawing loop.
@@ -113,8 +121,8 @@ public class Processing extends PApplet {
     public double getSquaredDist()
     {
         double totalSquaredDistance = 0;
-        int origoX = width/2;
-        int origoY = height/2;
+        float origoX = width/2;
+        float origoY = height/2;
         float xDist = 0;
         float yDist = 0;
 
@@ -130,7 +138,7 @@ public class Processing extends PApplet {
             }
             else yDist = (circle.getY()*-1) + origoY;
 
-            float distance = sqrt(xDist*xDist + yDist*yDist);
+            float distance = (xDist*xDist + yDist*yDist);
 
             totalSquaredDistance += distance;
         }
@@ -141,12 +149,12 @@ public class Processing extends PApplet {
     public double getExpectedDistance(int steps)
     {
         double dist = Math.sqrt(2);
-        return steps*(probNorth+probEeast+probWest+probSouth+((probNorthEast+probNorthWest+probSouthEast+probSouthWest)*dist));
+        return steps*((probNorth/numbSelect)+(probEast/numbSelect)+(probSouth/numbSelect)+(probWest/numbSelect));
     }
 
     public double getExpectedDiffCoeff(int steps)
     {
-        double squaredDist = getExpectedDistance(stepsRun);
+        double squaredDist = getExpectedDistance(steps);
         int dimensions = 2;
         return 1/((2*dimensions*steps)/squaredDist);
     }
@@ -190,10 +198,14 @@ public class Processing extends PApplet {
 
             float movement = 1;
             float r = random(0, numbSelect);
+            double probUp = probNorth;
+            double probRight = (probUp + probEast);
+            double probDown = (probRight + probSouth);
+            double probLeft = (probDown + probWest);
 
 
             //OPP
-            if (r >= 0 && r < 1) {
+            if (r >= 0 && r < probUp) {
                 up++;
                 y = y + movement;
                 if (y == height) {
@@ -205,7 +217,7 @@ public class Processing extends PApplet {
                 }
             }
             //HØGRE
-            if (r >= 1 && r < 2) {
+            if (r >= probUp && r < probRight) {
                 right++;
                 x = x + movement;
                 if (x == width) {
@@ -217,7 +229,7 @@ public class Processing extends PApplet {
                 }
             }
             //NED
-            if (r >= 2 && r < 3) {
+            if (r >= probRight && r < probDown) {
                 down++;
                 y = y - movement;
                 if (y == 0) {
@@ -229,7 +241,7 @@ public class Processing extends PApplet {
                 }
             }
             //VENSTRE
-            if (r >= 3 && r < 4) {
+            if (r >= probDown && r < probLeft) {
                 left++;
                 x = x - movement;
                 if (x == 0) {

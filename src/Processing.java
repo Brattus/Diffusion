@@ -6,15 +6,21 @@ public class Processing extends PApplet {
         PApplet.main(new String[]{"--present", "Processing"});
     }
 
-    MovingCircle[] myCircleArray = new MovingCircle[1000];
+    int nParticles = 1000;
+    MovingCircle[] myCircleArray = new MovingCircle[nParticles];
     float totalSteps = 0;
+    int stepsRun = 0;
     int particularSteps = 0;
     boolean edgeReached = false;
     float seconds;
     float timeToEdge;
     int left, right, up, down;
     boolean saved = false;
+    boolean pause = false;
     float xVal = 0; float yVal = 0;
+    int numbSelect = 4;
+    float probNorth = 1/numbSelect; float probEeast = 1/numbSelect; float probWest = 1/numbSelect; float probSouth = 1/numbSelect;
+    float probNorthEast = 0/numbSelect; float probNorthWest = 0/numbSelect; float probSouthEast = 0/numbSelect; float probSouthWest = 0/numbSelect;
 
     public void setup() {
         // Keep track of steps made in x direction.
@@ -38,6 +44,7 @@ public class Processing extends PApplet {
 
     public void draw() {
         seconds = (millis() / 1000);
+        stepsRun++;
 
         background(color(244, 255, 255));
 
@@ -79,8 +86,85 @@ public class Processing extends PApplet {
             text("Total steps made: " + sk + " M", 10, height-10);
         } else text("Total steps made: " + skk + " K", 10, height-10);
 
+        double totDist = getSquaredDist();
+        String sqrDist = Double.toString(totDist);
+
+        double exDiffCoeff = getExpectedDiffCoeff(stepsRun);
+        String diffCoeff = Double.toString(exDiffCoeff);
+
+        double estDiff = getEstimatedDiffusion();
+        String estDiffStr = Double.toString(estDiff);
+
         text("X: " + xVal + "   Y: " + (height-yVal), 5, 15);
+        text("Total dist: " + sqrDist.substring(0, 6), 5, 35);
+        text("ExDiffCoeff: " + diffCoeff, 5, 55);
+        text("EstDiff: " + estDiffStr.substring(0, 8), 5, 75);
     }
+
+    // Pause, un-pause the drawing loop.
+    public void keyPressed() {
+        pause = !pause;
+        if (pause)
+            noLoop();
+        else
+            loop();
+    }
+
+    public double getSquaredDist()
+    {
+        double totalSquaredDistance = 0;
+        int origoX = width/2;
+        int origoY = height/2;
+        int xDist = 0;
+        int yDist = 0;
+
+        for (int i = 0; i < myCircleArray.length; i++)
+        {
+            if(getX() > origoX){
+                xDist = getX() - origoX;
+            }
+            else xDist = (getX()*-1) + origoX;
+            if(getY() > origoY){
+                yDist = getY() - origoY;
+            }
+            else yDist = (getY()*-1) + origoY;
+
+            float distance = sqrt(xDist*xDist + yDist*yDist);
+
+            totalSquaredDistance += distance;
+        }
+        return totalSquaredDistance/nParticles;
+    }
+
+
+    public double getExpectedDistance(int steps)
+    {
+        double dist = Math.sqrt(2);
+        return steps*(probNorth+probEeast+probWest+probSouth+((probNorthEast+probNorthWest+probSouthEast+probSouthWest)*dist));
+    }
+
+    public double getExpectedDiffCoeff(int steps)
+    {
+        double squaredDist = getExpectedDistance(stepsRun);
+        int dimensions = 2;
+        return 1/((2*dimensions*steps)/squaredDist);
+    }
+
+    public double getEstimatedDiffusion()
+    {
+        double squaredDist = getSquaredDist();
+        int dimensions = 2;
+        return 1/((2*dimensions*stepsRun)/squaredDist);
+    }
+
+
+
+
+
+
+
+
+
 
     class MovingCircle {
         float x;
@@ -104,7 +188,7 @@ public class Processing extends PApplet {
             totalSteps++;
 
             float movement = 1;
-            float r = random(0, 5);
+            float r = random(0, numbSelect);
 
 
             //OPP

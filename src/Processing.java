@@ -49,6 +49,11 @@ public class Processing extends PApplet {
     public void draw() {
         seconds = (millis() / 1000);
         stepsRun++;
+        if(stepsRun == 1000){pause = !pause;}
+        if (pause)
+            noLoop();
+        else
+            loop();
 
         background(color(244, 255, 255));
 
@@ -77,7 +82,7 @@ public class Processing extends PApplet {
             }
             fill(0);
             textSize(15);
-            text("Time to edge: " + timeToEdge + "s", 5, 95);
+            text("Time to edge: " + timeToEdge + "s", 5, 115);
 
         }
         fill(0);

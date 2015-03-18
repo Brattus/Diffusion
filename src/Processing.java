@@ -96,9 +96,9 @@ public class Processing extends PApplet {
         String estDiffStr = Double.toString(estDiff);
 
         text("X: " + xVal + "   Y: " + (height-yVal), 5, 15);
-        text("Total dist: " + sqrDist.substring(0, 6), 5, 35);
+        text("Total dist: " + sqrDist, 5, 35);
         text("ExDiffCoeff: " + diffCoeff, 5, 55);
-        text("EstDiff: " + estDiffStr.substring(0, 8), 5, 75);
+        text("EstDiff: " + estDiffStr, 5, 75);
     }
 
     // Pause, un-pause the drawing loop.
@@ -115,19 +115,20 @@ public class Processing extends PApplet {
         double totalSquaredDistance = 0;
         int origoX = width/2;
         int origoY = height/2;
-        int xDist = 0;
-        int yDist = 0;
+        float xDist = 0;
+        float yDist = 0;
 
         for (int i = 0; i < myCircleArray.length; i++)
         {
-            if(getX() > origoX){
-                xDist = getX() - origoX;
+            MovingCircle circle = myCircleArray[i];
+            if(circle.getX() > origoX){
+                xDist = circle.getX() - origoX;
             }
-            else xDist = (getX()*-1) + origoX;
-            if(getY() > origoY){
-                yDist = getY() - origoY;
+            else xDist = (circle.getX()*-1) + origoX;
+            if(circle.getY() > origoY){
+                yDist = circle.getY() - origoY;
             }
-            else yDist = (getY()*-1) + origoY;
+            else yDist = (circle.getY()*-1) + origoY;
 
             float distance = sqrt(xDist*xDist + yDist*yDist);
 
